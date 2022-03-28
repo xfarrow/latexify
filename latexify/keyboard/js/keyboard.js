@@ -12,7 +12,7 @@ const Keyboard = {
 
     properties: {
         value: "",
-        capsLock: false
+        capsLock: false // if capslock is on, the text gets automatically sorrounded by dollar signs
     },
 
     init() {
@@ -42,12 +42,15 @@ const Keyboard = {
     },
 
     _createKeys() {
+        let latexSymbol;
+
         const fragment = document.createDocumentFragment();
+        
         const keyLayout = [
-            "in", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
-            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-            "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
-            "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
+            "\u2208", "\u2209", "\u220B", "\u220C", "\u2203", "\u2204", "\u2200", "\u2205", "\u2286", "\u2287", "backspace",
+            "\u2282", "\u2283","\u2284", "\u2285", "\u22c3", "\u22c2", "\u2206", "\u2264", "\u2265", "\u2245",
+            "caps", "\u2211", "\u220f", "\u221A", "\u221B", "\u221C", "\u222B", "\u222E", "\u222c", "\u222f", "enter",
+            "done", "{", "|", "log", "ln", "\u00b0", "\u00b9", "\u00b2", "\u2081", "\u2082", "$",
             "space"
         ];
 
@@ -58,7 +61,7 @@ const Keyboard = {
 
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["backspace", "p", "enter", "?"].indexOf(key) !== -1;
+            const insertLineBreak = ["backspace", "\u2245", "enter", "$"].indexOf(key) !== -1;
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
@@ -82,7 +85,7 @@ const Keyboard = {
 
                     keyElement.addEventListener("click", () => {
                         this._toggleCapsLock();
-                        keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
+                        keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock); // turn on light
                     });
 
                     break;
@@ -121,10 +124,18 @@ const Keyboard = {
                     break;
 
                 default:
-                    keyElement.textContent = key.toLowerCase();
+                    keyElement.textContent = key;
+
+                    if(key === "\u2208")
+                    {
+                        latexSymbol = "\\in"; //in
+                    } 
+                    else if(key === "\u2209"){
+                         latexSymbol = "\\notin"; // not in
+                    }
 
                     keyElement.addEventListener("click", () => {
-                        this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                        this.properties.value += this.properties.capsLock ? "$".concat(latexSymbol , "$") : latexSymbol;
                         this._triggerEvent("oninput");
                     });
 
@@ -149,12 +160,6 @@ const Keyboard = {
 
     _toggleCapsLock() {
         this.properties.capsLock = !this.properties.capsLock;
-
-        for (const key of this.elements.keys) {
-            if (key.childElementCount === 0) {
-                key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
-            }
-        }
     },
 
     open(initialValue, oninput, onclose) {
