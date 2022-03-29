@@ -46,8 +46,8 @@ const Keyboard = {
         const fragment = document.createDocumentFragment();
         
         const keyLayout = [
-            "\u2208", "\u2209", "\u220B", "\u220C", "\u2203", "\u2204", "\u2200", "\u2205", "\u2286", "\u2287", "backspace",
-            "\u2282", "\u2283","\u2284", "\u2285", "\u22c3", "\u22c2", "\u2206", "\u2264", "\u2265", "\u2245",
+            "\u2208", "\u2209", "\u220b", "\u220c", "\u2203", "\u2204", "\u2200", "\u2205", "\u2286", "\u2287", "backspace",
+            "\u2282", "\u2283","\u2288", "\u2289", "\u22c3", "\u22c2", "\u2206", "\u2264", "\u2265", "\u2245",
             "caps", "\u2211", "\u220f", "\u221A", "\u221B", "\u221C", "\u222B", "\u222E", "\u222c", "\u222f", "enter",
             "done", "{", "|", "log", "ln", "\u00b0", "\u00b9", "\u00b2", "\u2081", "\u2082", "$",
             "space"
@@ -139,7 +139,166 @@ const Keyboard = {
                     });
 				
 					break;
+					
+				case "\u220b":
+					keyElement.textContent = key;
+					keyElement.addEventListener("click", () => {
+						this.properties.value += this.properties.capsLock ? "$".concat("\\ni" , "$") : "\\ni";
+						this._triggerEvent("oninput");
+                    });
+					
+				case "\u220c":
+					keyElement.textContent = key;
+					keyElement.addEventListener("click", () => {
+						this.properties.value += this.properties.capsLock ? "$".concat("\\notni" , "$") : "\\notni";
+						this._triggerEvent("oninput");
+                    });
 				
+					break;
+					
+				case "\u2203":
+					keyElement.textContent = key;
+					keyElement.addEventListener("click", () => {
+						this.properties.value += this.properties.capsLock ? "$".concat("\\exists" , "$") : "\\exists";
+						this._triggerEvent("oninput");
+                    });
+				
+					break;
+
+                case "\u2204":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\nexists" , "$") : "\\nexists";
+                        this._triggerEvent("oninput");
+                    });
+                    
+                        break;
+
+                case "\u2200":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\forall" , "$") : "\\forall";
+                        this._triggerEvent("oninput");
+                    });
+                            
+                    break;
+				
+                case "\u2205":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\emptyset" , "$") : "\\emptyset";
+                        this._triggerEvent("oninput");
+                    });
+                                
+                    break;
+
+                case "\u2286":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\subseteqq " , "$") : "\\subseteqq";
+                        this._triggerEvent("oninput");
+                    });
+                                
+                    break;
+
+                case "\u2287":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\supseteqq " , "$") : "\\supseteqq";
+                        this._triggerEvent("oninput");
+                    });
+                                
+                    break;
+
+                case "\u2282":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\subset " , "$") : "\\subset";
+                        this._triggerEvent("oninput");
+                    });
+                                
+                    break;
+
+                case "\u2283":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\supset " , "$") : "\\supset";
+                        this._triggerEvent("oninput");
+                    });
+                                
+                    break;
+
+                case "\u2288":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\nsubseteq " , "$") : "\\nsubseteq";
+                        this._triggerEvent("oninput");
+                     });
+                                    
+                    break;
+
+                case "\u2289":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\nsupseteq " , "$") : "\\nsupseteq";
+                        this._triggerEvent("oninput");
+                     });
+                                    
+                    break;
+
+                case "\u22c3":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\cup " , "$") : "\\cup";
+                        this._triggerEvent("oninput");
+                     });
+                                    
+                    break;               
+                    
+                case "\u22c2":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\cap " , "$") : "\\cap";
+                        this._triggerEvent("oninput");
+                     });
+                                    
+                    break;
+                    
+                case "\u2206":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\bigtriangleup " , "$") : "\\bigtriangleup";
+                        this._triggerEvent("oninput");
+                     });
+                                    
+                    break; 
+                    
+                case "\u2264":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\leq " , "$") : "\\leq";
+                        this._triggerEvent("oninput");
+                    });
+                                        
+                    break;  
+                    
+                case "\u2265":
+                    keyElement.textContent = key;
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? "$".concat("\\geq " , "$") : "\\geq";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                    case "\u2245":
+                        keyElement.textContent = key;
+                        keyElement.addEventListener("click", () => {
+                            this.properties.value += this.properties.capsLock ? "$".concat("\\cong " , "$") : "\\cong";
+                            this._triggerEvent("oninput");
+                        });
+                                        
+                    break;  
 
                 default:
                     keyElement.textContent = key;
