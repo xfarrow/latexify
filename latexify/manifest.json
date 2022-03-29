@@ -9,7 +9,14 @@
     "48": "icons/logo.png"
   },
   
-    "permissions": [
+    "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["/keyboard/js/keyboard.js"]
+    }
+  ],
+  
+  "permissions": [
     "activeTab"
   ],
 
@@ -17,6 +24,6 @@
     "default_icon": "icons/logo_32.png",
     "default_title": "Latexify",
     "default_popup": "popup/popup.html"
-  },
+  }
 
 }

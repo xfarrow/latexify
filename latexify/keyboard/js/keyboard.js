@@ -4,7 +4,6 @@ const Keyboard = {
         keysContainer: null,
         keys: []
     },
-
     eventHandlers: {
         oninput: null,
         onclose: null
@@ -32,7 +31,7 @@ const Keyboard = {
         document.body.appendChild(this.elements.main);
 
         // Automatically use keyboard for elements with .use-keyboard-input
-        document.querySelectorAll("input, textarea").forEach(element => {
+        document.querySelectorAll(".use-keyboard-input").forEach(element => {
             element.addEventListener("focus", () => {
                 this.open(element.value, currentValue => {
                     element.value = currentValue;
@@ -122,24 +121,28 @@ const Keyboard = {
                     });
 
                     break;
+					
+				case "\u2208":
+				    keyElement.textContent = key;
+					keyElement.addEventListener("click", () => {
+						this.properties.value += this.properties.capsLock ? "$".concat("\\in" , "$") : "\\in";
+						this._triggerEvent("oninput");
+                    });
+				
+					break;
+					
+				case "\u2209":
+					keyElement.textContent = key;
+					keyElement.addEventListener("click", () => {
+						this.properties.value += this.properties.capsLock ? "$".concat("\\notin" , "$") : "\\notin";
+						this._triggerEvent("oninput");
+                    });
+				
+					break;
+				
 
                 default:
                     keyElement.textContent = key;
-
-                    if(key === "\u2208")
-                    {
-                        latexSymbol = "\\in"; //in
-                    } 
-                    else if(key === "\u2209"){
-                         latexSymbol = "\\notin"; // not in
-                    }
-
-                    keyElement.addEventListener("click", () => {
-                        this.properties.value += this.properties.capsLock ? "$".concat(latexSymbol , "$") : latexSymbol;
-                        this._triggerEvent("oninput");
-                    });
-
-                    break;
             }
 
             fragment.appendChild(keyElement);
@@ -177,6 +180,5 @@ const Keyboard = {
     }
 };
 
-window.addEventListener("DOMContentLoaded", function () {
-    Keyboard.init();
-});
+Keyboard.init();
+
